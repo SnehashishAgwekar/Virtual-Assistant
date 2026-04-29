@@ -1,30 +1,40 @@
 import mongoose from "mongoose";
 
-const userSchema=new mongoose.Schema({
-    name:{
-        type:String,
-        required:true
-    },
-    email:{
-        type:String,
-        required:true,
-        unique:true
-    },
-    password:{
-        type:String,
-        required:true
-    },
-    assistantName:{
-        type:String
-    },
-     assistantImage:{
-        type:String
-    },
-    history:[
-        {type:String}
-    ]
+const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  assistantName: {
+    type: String,
+    default: "Assistant",
+  },
+  assistantImage: {
+    type: String,
+    default: "",
+  },
+  history: [
+    {
+      type: String,
+    }
+  ],
+  // ✅ NEW — saved contacts for WhatsApp
+  contacts: [
+    {
+      name: { type: String },
+      phone: { type: String }, // international format without +: 919876543210
+    }
+  ]
+});
 
-},{timestamps:true})
-
-const User=mongoose.model("User",userSchema)
-export default User
+const User = mongoose.model("User", userSchema);
+export default User;
